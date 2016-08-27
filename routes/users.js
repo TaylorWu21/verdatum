@@ -10,7 +10,7 @@ router.get('/', function(req, res) {
 });
 
 router.get('/:id', function(req, res) {
-	res.render('user')
+	res.render('user');
 });
 
 router.post('/', function(req, res) {
@@ -40,7 +40,7 @@ router.put('/:id', function(req, res) {
 
 router.delete('/:id', function(req, res) {
 	User.findById(req.params.id, function(err, user) {
-		user.remove();
+		User.remove();
 		Comment.find({ userId: req.params.id}).remove().exec(function(err, comments) {
 			res.status(200).send({ success: true});
 		});
