@@ -9,7 +9,7 @@ mongoose.connect( 'mongodb://localhost/verdatum' );
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
-// var comments = require('./routes/comments');
+var comments = require('./routes/comments');
 
 var app = express();
 
@@ -37,7 +37,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/users', users);
-// app.use('/comments', comments);
+app.use('/comments', comments);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
