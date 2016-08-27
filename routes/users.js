@@ -20,6 +20,8 @@ router.post('/', function(req, res) {
 		gender: req.body.gender,
 		story: req.body.story,
 		like: req.body.like
+	}).save( function(err, user) {
+		res.json(user);
 	});
 });
 

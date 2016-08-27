@@ -1,7 +1,7 @@
 import React from 'react';
 import $ from 'jquery';
-import User from './User.js';
-import UserForm from './UserForm.js';
+import User from './User';
+import UserForm from './UserForm';
 
 class Users extends React.Component {
   constructor(props){
@@ -68,4 +68,4 @@ class Users extends React.Component {
   }
 }
 
-export default Users.js
+export default Users;
