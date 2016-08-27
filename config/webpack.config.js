@@ -6,8 +6,7 @@ var webpack = require('webpack');
 module.exports = {
   devtool: 'eval-source-map',
   entry: {
-    app: './app/index.js',
-    
+    app: './app/index.js'
   },
   output: {
     path: path.join(__dirname + '/public/'),
