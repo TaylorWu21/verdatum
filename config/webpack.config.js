@@ -7,7 +7,7 @@ module.exports = {
   devtool: 'eval-source-map',
   entry: {
     app: './app/index.js',
-    userL './app/users.js'
+    
   },
   output: {
     path: path.join(__dirname + '/public/'),

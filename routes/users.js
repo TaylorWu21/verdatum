@@ -38,7 +38,7 @@ router.put('/:id', function(req, res) {
 router.delete('/:id', function(req, res) {
 	User.findById(req.params.id, function(err, user) {
 		user.remove();
-		Comment.find({ userId: req.params.id}.remove().exec(function(err, comments) {
+		Comment.find({ userId: req.params.id}).remove().exec(function(err, comments) {
 			res.status(200).send({ success: true});
 		});
 	});
