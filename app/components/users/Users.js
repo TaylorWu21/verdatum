@@ -31,7 +31,7 @@ class Users extends React.Component {
       if (user._id === id) {
         return {
           ...user,
-          description, name
+          story, name
         }
       }
 

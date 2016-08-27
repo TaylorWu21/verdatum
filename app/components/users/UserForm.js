@@ -10,12 +10,11 @@ class UserForm extends React.Component {
 
   addUser(e) {
     e.preventDefault();
-    let story = this.refs .story;
+    let story = this.refs.story;
     let name = this.refs.name;
     let age = this.refs.age;
     let gender = this.refs.gender;
     let like = false;
-
     $.ajax({
       url: '/users',
       type: 'POST',
@@ -23,7 +22,9 @@ class UserForm extends React.Component {
       data: { name: name.value, story: story.value, age: age.value, gender: gender.value, like: like }
     }).done( user => {
       this.props.addUser(user);
-      this.refs.form.value =null;
+      name.value = null;
+      this.refs.form.value = null;
+    }).fail( () => {
       debugger
     })
   }
@@ -31,13 +32,10 @@ class UserForm extends React.Component {
   render() {
     return (
       <div className="center">
-        <form onSubmit={this.addUser} ref="form">
+        <form ref="form">
           <input placeholder="name" ref="name" />
           <input placeholder="age" ref="age" />
-          <select ref="gender" form="userform">
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-          </select>
+          <input placeholder="gender" ref="gender" />
           <input placeholder="story" ref="story" />
         </form>
         <button className="btn" onClick={this.addUser}>Submit</button>
