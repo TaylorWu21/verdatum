@@ -7,3 +7,14 @@
 	cursor: pointer;
 	width: 24px;
 }
+
+body {
+	background-image: url('../images/city.jpg');
+	background-size: cover;
+}
+
+input {
+
+	margin-bottom: 5px;
+
+}
