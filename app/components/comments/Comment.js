@@ -20,14 +20,11 @@ class Comment extends React.Component {
 	render() {
 		return(
 			<div className="row">
-        <div className="col s12 m4">
+        <div className="col offset-m4 s12 m4">
           <div className="card white">
             <div className="card-content">
               <span className="card-title">Admirer: {this.props.admirer}</span>
               <p>Comment: {this.props.content}</p>
-            </div>
-            <div className='card-action'>
-            	<button onClick={this.deleteComment} className='btn'>Delete</button>
             </div>
           </div>
         </div>
