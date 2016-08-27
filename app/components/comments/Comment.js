@@ -1,41 +1,41 @@
 import React from 'react';
+import $ from 'jquery';
 
+class Comment extends React.Component {
+	constructor(props) {
+		super(props);
+		this.deleteComment = this.deleteComment.bind(this);
+	}
 
-class Comment extends React.Component{
-  constructor(props) {
-    super(props);
-    this.deleteComment = this.deleteComment.bind(this);
-    this.addComment = this.addComment.bind(this);
-    this.state = { comments: [] }
-  }
+	deleteComment() {
+		$.ajax({
+			url: `/comments/${this.props.id}`,
+			type: "DELETE",
+			data: { id: this.props.id }
+		}).done( () => {
+			this.props.deleteComment(this.props._id)
+		})
+	}
 
-  componentWillMount() {
-    $.ajax({
-      url: '/comments',
-      type: 'GET',
-      dataType: 'JSON',
-      data: { listId: this.props._id }
-    }).done( cards => {
-      this.setState({ cards });
-    });
-  }
-
-  addComment(comment) {
-    this.setState({ comments: [...this.state.comments, comment] });
-  }
-
-
-  render() {
-    let comments = this.state.comments.map( comment => {
-      return(<Comment key={comment._id} {...card} />);
-    });
-    return(
-      <div className="col s12 m2">
-        <button onClick={this.deleteList} className="btn">Delete</button>
-        <h3 className="center"
-    )
-  }
-
-
-
+	render() {
+		let comments = this.state.comment.map( comment => {
+			return(
+				<div className="row">
+        <div className="col s12 m6">
+          <div className="card blue-grey darken-1">
+            <div className="card-content white-text">
+              <span className="card-title">{comment.admirer}</span>
+              <p>{comment.content}</p>
+            </div>
+            <div className='card-action'>
+            	<button onClick={this.deleteComment} className='btn'>Delete</button>
+            </div>
+          </div>
+        </div>
+      </div>
+			)
+		})
+	}
 }
+
+export default Comment;
