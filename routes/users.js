@@ -17,7 +17,7 @@ router.post('/', function(req, res) {
 	console.log("I am posting")
 	new User({
 		name: req.body.name,
-		age: parsInt(req.body.age),
+		age: parseInt(req.body.age),
 		gender: req.body.gender,
 		story: req.body.story,
 		like: req.body.like

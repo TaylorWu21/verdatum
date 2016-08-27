@@ -41,18 +41,26 @@ class User extends React.Component {
 
   user() {
     return (
+    <div class="row">
       <div className="col s12 m3">
         <div className="card blue-grey">
-          <div className="card-content white-text">
-            <span onClick={this.toggleEdit} className="card-title"> {this.props.name}</span>
+          <div className="card-content white-text center">
+            <span onClick={this.toggleEdit} className="card-title center"> {this.props.name}</span>
             <p>{this.props.story}</p>
           </div>
           <div className="card-action">
-            <button onClick={this.deleteUser} className="btn">Delete</button>
-            <a href={`/users/${this.props._id}`} className="btn">Show</a>
+            <div className="row">
+                <div className="col s6 m6">
+                  <button onClick={this.deleteUser} className="btn buttonz">X</button>
+                </div>
+                <div className="col s6 m6">
+                  <a href={`/users/${this.props._id}`} className="btn buttonz">Show</a>
+                </div>
+            </div>
           </div>
         </div>
       </div>
+    </div>
     );
   }
 

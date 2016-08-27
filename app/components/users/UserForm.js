@@ -23,15 +23,19 @@ class UserForm extends React.Component {
     }).done( user => {
       this.props.addUser(user);
       name.value = null;
+      age.value = null;
+      gender.value = null;
+      story.value = null;
       this.refs.form.value = null;
     }).fail( () => {
       debugger
-    })
+    });
   }
 
   render() {
     return (
       <div className="center">
+        <h1 className="center"> Fill Out and Get Started </h1>
         <form ref="form">
           <input placeholder="name" ref="name" />
           <input placeholder="age" ref="age" />
