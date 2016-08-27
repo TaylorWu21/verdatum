@@ -1,69 +1,90 @@
 import React from 'react';
 import $ from 'jquery';
 
-class User extends React.Component{
-  constructor(props){
+class User extends React.Component {
+  constructor(props) {
     super(props);
-    this.addUser = this.addUser.bind(this);
-    this.deleteUser = this.deleteUser.bind(this);
+    this.toggleEdit = this.toggleEdit.bind(this);
     this.updateUser = this.updateUser.bind(this);
-    this.state = { users: [] };
+    this.deleteUser = this.deleteUser.bind(this);
+    this.state = { edit: false };
   }
 
-  componentWillMount() {
+  toggleEdit() {
+    this.setState({ edit: !this.state.edit });
+  }
+
+  updateUser() {
+    let name = this.refs.name.value;
+    let story = this.refs.story.value;
     $.ajax({
-      url: '/users',
-      type: 'GET',
+      url: `/users/${this.props._id}`,
+      type: 'PUT',
+      dataType: 'JSON',
+      data: { name, story }
+    });done( user => {
+      this.props.updateUser(user._id, name, story); 
+      this.toggleEdit();
+    });
+  }
+
+  deleteUser() {
+    $.ajax({
+      url: `/users/${this.props._id}`,
+      type: 'DELETE',
       dataType: 'JSON'
-    }).done( users => {
-      this.setState({ users });
+    }).done( () => {
+      this.props.deleteUser(this.props._id);
     });
   }
 
-  deleteUser(id) {
-    this.setState({ users: this.state.users.filter( user => user._id !== id ) });
-  }
 
-  updateUser(id, name, story) {
-    let users = this.state.users.map( user => {
-      if (user._id === id) {
-        return {
-          ...user,
-          description, name
-        }
-      }
-
-      return user;      
-    });
-
-    this.setState({ users });
-  }
-
-  addUser(user) {
-    this.setState({ users: [...this.state.users, user] });
-  }
-
-
-  render() {
-    let users = this.state.users.map( user => {
-      return(
-        <User
-        key={user._id}
-        {...user}
-        deleteUser={this.deleteUser}
-        updateUser={this.updateUser}
-        />
-      );
-    });
+  user() {
     return (
-      <div>
-        <Userform addUser={this.addUser} />
-        <div className="row">
-          { users }
+      <div className="col s12 m3">
+        <div className="card blue-grey">
+          <div className="card-content white-text">
+            <span onClick={this.toggleEdit} className="card-title"> {this.props.name}</span>
+            <p>{this.props.story}</p>
+          </div>
+          <div className="card-action">
+            <button onClick={this.deleteUser} className="btn">Delete</button>
+            <a href={`/users/${this.props._id}`} className="btn">Show</a>
+          </div>
         </div>
       </div>
     );
   }
+
+  edit() {
+    return (
+      <div className="col s12 m3">
+        <div className="card blue-grey">
+          <div className="card-content white-text">
+            <input
+              required={true}
+              ref="name"
+              placeholder={this.props.name}
+              defaultValue={this.props.name}
+              />
+              <textarea ref="story">{this.props.story}</textarea>
+            </div>
+            <div className="card-action">
+              <button onClick={this.toggleEdit} className="btn">Cancel</button>
+              <button onClick={this.updateUser} className="btn">Update</button>
+            </div>
+          </div>
+        </div>
+    );
+  }
+
+  render() {
+    if (this.state.edit)
+      return this.edit();
+    else
+      return this.user();
+  }
+
 }
 
-export default Users;
+export default User;

@@ -2,10 +2,10 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var User = new Schema({
-	name: { type: String, require: true },
-	age: { type: Number, require: true},
-	gender: { type: String, require: true},
-	story: { type: String, require: true},
+	name: { type: String },
+	age: { type: Number },
+	gender: { type: String },
+	story: { type: String },
 	like: { type: Boolean }
 });
 

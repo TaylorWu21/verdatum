@@ -14,12 +14,15 @@ router.get('/:id', function(req, res) {
 });
 
 router.post('/', function(req, res) {
+	console.log("I am posting")
 	new User({
 		name: req.body.name,
-		age: req.body.age,
+		age: parsInt(req.body.age),
 		gender: req.body.gender,
 		story: req.body.story,
 		like: req.body.like
+	}).save( function(err, user) {
+		res.json(user);
 	});
 });
 
