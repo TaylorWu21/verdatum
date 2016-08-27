@@ -18,23 +18,18 @@ class Comment extends React.Component {
 	}
 
 	render() {
-		let comments = this.state.comment.map( comment => {
-			return(
-				<div className="row">
-        <div className="col s12 m6">
-          <div className="card blue-grey darken-1">
-            <div className="card-content white-text">
-              <span className="card-title">{comment.admirer}</span>
-              <p>{comment.content}</p>
-            </div>
-            <div className='card-action'>
-            	<button onClick={this.deleteComment} className='btn'>Delete</button>
+		return(
+			<div className="row">
+        <div className="col offset-m4 s12 m4">
+          <div className="card white">
+            <div className="card-content">
+              <span className="card-title">Admirer: {this.props.admirer}</span>
+              <p>Comment: {this.props.content}</p>
             </div>
           </div>
         </div>
       </div>
-			)
-		})
+		)
 	}
 }
 

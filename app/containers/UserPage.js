@@ -9,7 +9,6 @@ class UserPage extends React.Component {
 	render() {
 		return(
 			<div>
-				<p> UserPage here </p>
 				<Comments userId={this.props.id} />
 			</div>
 		)

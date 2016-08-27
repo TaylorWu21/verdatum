@@ -7,21 +7,20 @@ router.get('/', function(req, res) {
 	var query = Comment.find({});
 	query.where('userId', req.query.userId);
 	query.exec(function(err, comments) {
+		console.log('comments are: ' + comments);
 		res.json(comments);
 	});
 });
 
 router.post('/', function(req, res) {
-	Comment.findByIdAndUpdate(
-		req.params.id,
-			{ $set: 
-				{ admirer: req.body.admirer, 
-					content: req.body.content}},
-			{ new: true },
-			function(err, comment) {
-				res.json(comment);
-			}
-	);
+	new Comment({ 
+		admirer: req.body.admirer, 
+		content: req.body.content,
+		userId: req.body.userId
+	}).save( function(err, comment) {
+		console.log('/comments post fired w/ save');
+		res.json(comment);		
+	});
 });
 
 router.delete('/:id', function(req, res) {
