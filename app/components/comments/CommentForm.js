@@ -15,7 +15,7 @@ class CommentForm extends React.Component{
 			url: '/comments',
 			type: 'POST',
 			dataType: 'JSON',
-			data: { admirer: admirer.value, content: content.value, userId: this.props.userId}
+			data: { admirer: admirer.value, content: content.value, userId: this.props.userId }
 		}).done( comment => {
 			this.props.addComment(comment);
 			admirer.value = null;

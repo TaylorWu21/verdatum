@@ -15,26 +15,11 @@ class Comments extends React.Component {
 			url: '/comments',
 			type: 'GET',
 			dataType: 'JSON',
-			data: { UserId: this.props.userId }
-		}).done(comments => {
+			data: { userId: this.props.userId }
+		}).done( comments => {
 			this.setState({ comments });
-		})
+		});
 	}
-
-	addComment(comment) {
-		this.setState({ comments: [...this.state.comments, comment] });
-	}
-
-  componentWillMount() {
-    $.ajax({
-      url: '/comments',
-      type: 'GET',
-      dataType: 'JSON',
-      data: { userId: this.props.userId }
-    }).done( comments => {
-      this.setState({ comments });
-    });
-  }
 
   addComment(comment) {
     this.setState({ comments: [...this.state.comments, comment] });
@@ -42,13 +27,13 @@ class Comments extends React.Component {
 
 	render() {
 		let comments = this.state.comments.map(comment => {
-			return(<Comment key={comment._id} {...comment} />)
+			return(<Comment id={comment._id} key={comment._id} {...comment} />)
 		});
 		return(
 			<div>
 				{ comments }
 				<div className='row'>
-					<CommentForm addComment={this.addComment} UserId={this.props.UserId} />
+					<CommentForm addComment={this.addComment} userId={this.props.userId} />
 				</div>
 			</div>
 		);
