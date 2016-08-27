@@ -7,11 +7,16 @@ class User extends React.Component {
     this.toggleEdit = this.toggleEdit.bind(this);
     this.updateUser = this.updateUser.bind(this);
     this.deleteUser = this.deleteUser.bind(this);
-    this.state = { edit: false };
+    this.toggleFavorite = this.toggleFavorite.bind(this);
+    this.state = { edit: false, like: true };
   }
 
   toggleEdit() {
     this.setState({ edit: !this.state.edit });
+  }
+
+  toggleFavorite() {
+    this.setState({ like: !this.state.like });
   }
 
   updateUser() {
@@ -38,18 +43,19 @@ class User extends React.Component {
     });
   }
 
-
   user() {
     return (
       <div className="col s12 m3">
         <div className="card blue-grey">
           <div className="card-content white-text">
             <span onClick={this.toggleEdit} className="card-title"> {this.props.name}</span>
+            <span className="right">Age {this.props.age} Gender {this.props.gender}</span>
             <p>{this.props.story}</p>
           </div>
           <div className="card-action">
             <button onClick={this.deleteUser} className="btn">Delete</button>
             <a href={`/users/${this.props._id}`} className="btn">Show</a>
+            <i className="material-icons" onClick={this.toggleFavorite}>{ this.state.like ? 'favorite_border' : 'favorite' }</i>
           </div>
         </div>
       </div>
