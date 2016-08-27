@@ -14,7 +14,6 @@ router.get('/:id', function(req, res) {
 });
 
 router.post('/', function(req, res) {
-	console.log("I am posting")
 	new User({
 		name: req.body.name,
 		age: parseInt(req.body.age),

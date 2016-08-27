@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Landing from './containers/Landing';
+import LandingPage from './containers/LandingPage';
 
-let id = window.location.pathname.split("/landings/");
+// let id = window.location.pathname.split("/landings/")[1];
 
-ReactDOM.render(<Landing id={id}/>, document.getElementById('content'));
+ReactDOM.render(<LandingPage />, document.getElementById('content'));
